@@ -13,3 +13,10 @@ type UserAccountRequestDto struct {
 	AccountType   string `json:"account_type" validate:"required"`
 	Status        string `json:"status" validate:"required"`
 }
+
+type PaginatorDTO struct {
+	Limit  int `json:"limit" validate:"number:min=1&max=100"`
+	Offset int `json:"offset"`
+}
+
+// usar composição aqui

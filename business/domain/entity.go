@@ -18,6 +18,8 @@ type UserAccount struct {
 	DeletedAt     string `json:"deleted_at"`
 }
 
+// usar composição aqui
+
 /*
   CREATE TABLE user_account (
     id             STRING   PRIMARY KEY
