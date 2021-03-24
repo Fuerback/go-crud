@@ -2,10 +2,12 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/julienschmidt/httprouter"
+	router "github.com/Fuerback/go-crud/api/routers"
+	"github.com/Fuerback/go-crud/services"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -16,7 +18,12 @@ func main() {
 	}
 	defer db.Close()
 
-	router := httprouter.New()
-	handlers.Handlers(router)
-	http.ListenAndServe(":8080", router)
+	service := services.NewService(db)
+
+	r := router.Router()
+
+	fmt.Println("Starting server on the port 8080...")
+
+	log.Fatal(http.ListenAndServe(":8080", r))
+
 }
