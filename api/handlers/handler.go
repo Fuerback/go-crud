@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"database/sql"
 	"encoding/json"
-	"log"
 	"net/http"
 
 	"github.com/Fuerback/go-crud/business/domain"
@@ -34,7 +34,14 @@ func (h *Handler) getUser(w http.ResponseWriter, r *http.Request) {
 
 	user, err := h.service.Get(params["id"])
 	if err != nil {
-		log.Fatalf("Unable to get user. %v", err)
+		if err == sql.ErrNoRows {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write(formatJSONError(err.Error()))
+			return
+		}
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write(formatJSONError(err.Error()))
+		return
 	}
 
 	json.NewEncoder(w).Encode(user)
