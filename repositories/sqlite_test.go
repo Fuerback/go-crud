@@ -173,5 +173,3 @@ func createUser(ID string) *domain.UserAccount {
 		CreatedAt:     time.Now().Format(time.RFC3339),
 	}
 }
-
-//@todo implementar testes para as outras funções
