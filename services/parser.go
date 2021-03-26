@@ -24,13 +24,14 @@ func getDocumentType(document string) (string, error) {
 	}
 }
 
-func (ref UpdateUserParser) ParseMessageToDomain(u *domain.UserAccountRequestDto) (*domain.UserAccount, error) {
+func (ref UpdateUserParser) ParseMessageToDomain(ID string, u *domain.UserAccountRequestDto) (*domain.UserAccount, error) {
 	documentType, err := getDocumentType(u.Document)
 	if err != nil {
 		return &domain.UserAccount{}, err
 	}
 
 	user := &domain.UserAccount{
+		ID:            ID,
 		Name:          u.Name,
 		Email:         u.Email,
 		Document:      u.Document,
@@ -42,7 +43,7 @@ func (ref UpdateUserParser) ParseMessageToDomain(u *domain.UserAccountRequestDto
 		AccountDigit:  u.AccountDigit,
 		AccountType:   u.AccountType,
 		Status:        u.Status,
-		UpdatedAt:     sql.NullString{String: time.Now().String()},
+		UpdatedAt:     sql.NullString{String: time.Now().Format(time.RFC3339)},
 	}
 
 	return user, nil
