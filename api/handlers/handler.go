@@ -8,6 +8,7 @@ import (
 	"github.com/Fuerback/go-crud/business/domain"
 	"github.com/Fuerback/go-crud/services"
 	"github.com/gorilla/mux"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type Handler struct {
@@ -46,6 +47,14 @@ func (h *Handler) saveUser(w http.ResponseWriter, r *http.Request) {
 	var u domain.UserAccountRequestDto
 
 	err := json.NewDecoder(r.Body).Decode(&u)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(formatJSONError(err.Error()))
+		return
+	}
+
+	v := validator.New()
+	err = v.Struct(u)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write(formatJSONError(err.Error()))

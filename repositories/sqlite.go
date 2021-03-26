@@ -14,7 +14,6 @@ func (s *sqlite) GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccount, e
 	return nil, nil
 }
 func (s *sqlite) Get(ID string) (*domain.UserAccount, error) {
-	//b é um tipo Beer
 	var u domain.UserAccount
 
 	//o comando Prepare verifica se a consulta está válida
@@ -27,7 +26,7 @@ func (s *sqlite) Get(ID string) (*domain.UserAccount, error) {
 	if err != nil {
 		return nil, err
 	}
-	//deve retornar a posição da memória de b
+
 	return &u, nil
 }
 func (s *sqlite) Save(u *domain.UserAccount) error {

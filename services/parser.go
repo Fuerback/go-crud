@@ -1,6 +1,7 @@
 package services
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/Fuerback/go-crud/business/domain"
@@ -41,7 +42,7 @@ func (ref UpdateUserParser) ParseMessageToDomain(u *domain.UserAccountRequestDto
 		AccountDigit:  u.AccountDigit,
 		AccountType:   u.AccountType,
 		Status:        u.Status,
-		UpdatedAt:     time.Now().String(),
+		UpdatedAt:     sql.NullString{String: time.Now().String()},
 	}
 
 	return user, nil
@@ -66,7 +67,7 @@ func (ref SaveUserParser) ParseMessageToDomain(u *domain.UserAccountRequestDto) 
 		AccountDigit:  u.AccountDigit,
 		AccountType:   u.AccountType,
 		Status:        u.Status,
-		CreatedAt:     time.Now().String(),
+		CreatedAt:     time.Now().Format(time.RFC3339),
 	}
 
 	return user, nil

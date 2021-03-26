@@ -1,27 +1,28 @@
 package domain
 
+import "database/sql"
+
+// TODO: Usar composição e não retornar os sql.NullString
 type UserAccount struct {
-	ID            string `json:"id"`
-	Name          string `json:"name"`
-	Email         string `json:"email"`
-	Document      string `json:"document"`
-	DocumentType  string `json:"document_type"`
-	Bank          string `json:"bank"`
-	Agency        int32  `json:"agency"`
-	AgencyDigit   int8   `json:"agency_digit"`
-	AccountNumber int64  `json:"account_number"`
-	AccountDigit  int8   `json:"account_digit"`
-	AccountType   string `json:"account_type"`
-	Status        string `json:"status"`
-	CreatedAt     string `json:"created_at"`
-	UpdatedAt     string `json:"updated_at"`
-	DeletedAt     string `json:"deleted_at"`
+	ID            string         `json:"id"`
+	Name          string         `json:"name"`
+	Email         string         `json:"email"`
+	Document      string         `json:"document"`
+	DocumentType  string         `json:"document_type"`
+	Bank          string         `json:"bank"`
+	Agency        int32          `json:"agency"`
+	AgencyDigit   int8           `json:"agency_digit"`
+	AccountNumber int64          `json:"account_number"`
+	AccountDigit  int8           `json:"account_digit"`
+	AccountType   string         `json:"account_type"`
+	Status        string         `json:"status"`
+	CreatedAt     string         `json:"created_at"`
+	UpdatedAt     sql.NullString `json:"updated_at,omitempty"`
+	DeletedAt     sql.NullString `json:"deleted_at,omitempty"`
 }
 
-// usar composição aqui
-
 /*
-  CREATE TABLE user_account (
+CREATE TABLE user_account (
     id             STRING   PRIMARY KEY
                             UNIQUE
                             NOT NULL,
@@ -39,5 +40,5 @@ type UserAccount struct {
     created_at     DATETIME NOT NULL,
     updated_at     DATETIME,
     deleted_at     DATETIME
-);
+)
 */
