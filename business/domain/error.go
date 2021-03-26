@@ -2,4 +2,4 @@ package domain
 
 import "errors"
 
-var ErrInvalidDocuemtn = errors.New("invalid document")
+var ErrInvalidDocument = errors.New("Invalid document")

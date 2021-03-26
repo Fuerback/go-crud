@@ -20,7 +20,7 @@ func getDocumentType(document string) (string, error) {
 	case 14:
 		return "LEGAL", nil
 	default:
-		return "", domain.ErrInvalidDocuemtn
+		return "", domain.ErrInvalidDocument
 	}
 }
 
