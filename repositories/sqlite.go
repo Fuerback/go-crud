@@ -37,7 +37,7 @@ func (s *sqlite) GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccount, e
 func (s *sqlite) Get(ID string) (*domain.UserAccount, error) {
 	var u domain.UserAccount
 
-	stmt, err := s.DB.Prepare("select * from user_account where id = ?")
+	stmt, err := s.DB.Prepare("select * from user_account where id = ? and deleted_at is null")
 	if err != nil {
 		return nil, err
 	}
