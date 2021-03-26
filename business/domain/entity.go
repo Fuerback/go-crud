@@ -4,7 +4,7 @@ type UserAccount struct {
 	ID            string `json:"id"`
 	Name          string `json:"name"`
 	Email         string `json:"email"`
-	Document      int64  `json:"document"`
+	Document      string `json:"document"`
 	DocumentType  string `json:"document_type"`
 	Bank          string `json:"bank"`
 	Agency        int32  `json:"agency"`
@@ -27,7 +27,7 @@ type UserAccount struct {
                             NOT NULL,
     name           STRING   NOT NULL,
     email          STRING   NOT NULL,
-    document       INTEGER  NOT NULL,
+    document       STRING   NOT NULL,
     document_type  STRING   NOT NULL,
     bank           STRING   NOT NULL,
     agency         INTEGER  NOT NULL,
@@ -39,5 +39,5 @@ type UserAccount struct {
     created_at     DATETIME NOT NULL,
     updated_at     DATETIME,
     deleted_at     DATETIME
-  );
+);
 */

@@ -6,8 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	router "github.com/Fuerback/go-crud/api/routers"
+	handler "github.com/Fuerback/go-crud/api/handlers"
+	"github.com/Fuerback/go-crud/repositories"
 	"github.com/Fuerback/go-crud/services"
+	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -18,9 +20,13 @@ func main() {
 	}
 	defer db.Close()
 
-	service := services.NewService(db)
+	respository := repositories.NewService(db)
+	service := services.NewService(respository)
 
-	r := router.Router()
+	r := mux.NewRouter()
+
+	h := handler.New(service)
+	h.Handlers(r)
 
 	fmt.Println("Starting server on the port 8080...")
 

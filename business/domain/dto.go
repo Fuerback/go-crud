@@ -3,8 +3,7 @@ package domain
 type UserAccountRequestDto struct {
 	Name          string `json:"name" validate:"required,min=2,max=100"`
 	Email         string `json:"email" validate:"required,email"`
-	Document      int64  `json:"document" validate:"required,min=11,max=14"`
-	DocumentType  string `json:"document_type" validate:"required"`
+	Document      string `json:"document" validate:"required,min=11,max=14"`
 	Bank          string `json:"bank" validate:"required"`
 	Agency        int32  `json:"agency" validate:"required"`
 	AgencyDigit   int8   `json:"agency_digit" validate:"required,min=1,max=1"`
