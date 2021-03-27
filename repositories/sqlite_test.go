@@ -21,24 +21,24 @@ func TestSaveAndGet(t *testing.T) {
 
 	db, err := sql.Open("sqlite3", "../db/mydb_test.db")
 	if err != nil {
-		t.Fatalf("Erro conectando ao banco de dados %s", err.Error())
+		t.Fatalf("Error connecting on database %s", err.Error())
 	}
 	err = clearDB(db)
 	if err != nil {
-		t.Fatalf("Erro limpando o banco de dados: %s", err.Error())
+		t.Fatalf("Error emptying database: %s", err.Error())
 	}
 	defer db.Close()
 	repository := repositories.NewService(db)
 	err = repository.Save(u)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 	saved, err := repository.Get(UUID)
 	if err != nil {
-		t.Fatalf("Erro buscando do banco de dados: %s", err.Error())
+		t.Fatalf("Error searching on database: %s", err.Error())
 	}
 	if saved.ID != UUID {
-		t.Fatalf("Dados inválidos. Esperado %d, recebido %s", 1, saved.ID)
+		t.Fatalf("Invalid response. Expected %d, actual %s", 1, saved.ID)
 	}
 }
 
@@ -47,24 +47,24 @@ func TestSaveAndDelete(t *testing.T) {
 
 	db, err := sql.Open("sqlite3", "../db/mydb_test.db")
 	if err != nil {
-		t.Fatalf("Erro conectando ao banco de dados %s", err.Error())
+		t.Fatalf("Error connecting on database %s", err.Error())
 	}
 	err = clearDB(db)
 	if err != nil {
-		t.Fatalf("Erro limpando o banco de dados: %s", err.Error())
+		t.Fatalf("Error emptying database: %s", err.Error())
 	}
 	defer db.Close()
 	repository := repositories.NewService(db)
 	err = repository.Save(u)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 	saved, err := repository.Get(UUID)
 	if err != nil {
-		t.Fatalf("Erro buscando do banco de dados: %s", err.Error())
+		t.Fatalf("Error searching on database: %s", err.Error())
 	}
 	if saved.ID != UUID {
-		t.Fatalf("Dados inválidos. Esperado %d, recebido %s", 1, saved.ID)
+		t.Fatalf("Invalid response. Expected %d, actual %s", 1, saved.ID)
 	}
 }
 
@@ -73,11 +73,11 @@ func TestSaveAndUpdate(t *testing.T) {
 
 	db, err := sql.Open("sqlite3", "../db/mydb_test.db")
 	if err != nil {
-		t.Fatalf("Erro conectando ao banco de dados %s", err.Error())
+		t.Fatalf("Error connecting on database %s", err.Error())
 	}
 	err = clearDB(db)
 	if err != nil {
-		t.Fatalf("Erro limpando o banco de dados: %s", err.Error())
+		t.Fatalf("Error emptying database: %s", err.Error())
 	}
 	defer db.Close()
 
@@ -85,11 +85,11 @@ func TestSaveAndUpdate(t *testing.T) {
 
 	err = repository.Save(u)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 	user, err := repository.Get(UUID)
 	if err != nil {
-		t.Fatalf("Erro buscando do banco de dados: %s", err.Error())
+		t.Fatalf("Error searching on database: %s", err.Error())
 	}
 	if user == nil {
 		t.Fatalf("User not found")
@@ -97,11 +97,11 @@ func TestSaveAndUpdate(t *testing.T) {
 
 	err = repository.Delete(UUID)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 	user, err = repository.Get(UUID)
 	if err == nil {
-		t.Fatalf("Erro buscando do banco de dados: %s", err.Error())
+		t.Fatalf("Error searching on database: %s", err.Error())
 	}
 }
 
@@ -112,26 +112,26 @@ func TestGetAll(t *testing.T) {
 
 	db, err := sql.Open("sqlite3", "../db/mydb_test.db")
 	if err != nil {
-		t.Fatalf("Erro conectando ao banco de dados %s", err.Error())
+		t.Fatalf("Error connecting on database %s", err.Error())
 	}
 	err = clearDB(db)
 	if err != nil {
-		t.Fatalf("Erro limpando o banco de dados: %s", err.Error())
+		t.Fatalf("Error emptying database: %s", err.Error())
 	}
 	defer db.Close()
 	repository := repositories.NewService(db)
 
 	err = repository.Save(u1)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 	err = repository.Save(u2)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 	err = repository.Save(u3)
 	if err != nil {
-		t.Fatalf("Erro salvando no banco de dados: %s", err.Error())
+		t.Fatalf("Error saving on database: %s", err.Error())
 	}
 
 	paigantor := &domain.PaginatorDTO{
@@ -140,10 +140,10 @@ func TestGetAll(t *testing.T) {
 	}
 	users, err := repository.GetAll(*paigantor)
 	if err != nil {
-		t.Fatalf("Erro buscando do banco de dados: %s", err.Error())
+		t.Fatalf("Error connecting on database: %s", err.Error())
 	}
 	if len(users) != 3 {
-		t.Fatalf("Dados inválidos. Esperado lista com %d itens, recebido %d", 3, len(users))
+		t.Fatalf("Invalid response. Expected %d, Actual %d", 3, len(users))
 	}
 }
 
