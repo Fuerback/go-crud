@@ -3,9 +3,11 @@ package domain
 // TODO: Permitir digito 0 e validar valor maximo e minimo
 
 type UserAccountRequestDto struct {
+	ID            string `json:"id"`
 	Name          string `json:"name" validate:"required"`
 	Email         string `json:"email" validate:"required,email"`
 	Document      string `json:"document" validate:"required"`
+	DocumentType  string `json:"document_type"`
 	Bank          string `json:"bank" validate:"required"`
 	Agency        int32  `json:"agency" validate:"required"`
 	AgencyDigit   int8   `json:"agency_digit" validate:"required"`

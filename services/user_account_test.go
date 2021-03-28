@@ -40,6 +40,16 @@ func (ref *userAccountSuite) TestSaveUser_Success() {
 	ref.NoError(err)
 }
 
+func (ref *userAccountSuite) TestSaveUser_InvalidDocument() {
+	u := getUserDTO()
+	u.Document = "09876"
+
+	ref.repository.On("Save", mock.Anything).Return(nil).Once()
+
+	err := ref.services.Save(u)
+	ref.EqualError(err, "Invalid document")
+}
+
 func (ref *userAccountSuite) TestGetAll_Success() {
 	p := domain.PaginatorDTO{
 		Limit:  5,

@@ -8,18 +8,36 @@ import (
 var (
 	saveParser   SaveUserParser
 	updateParser UpdateUserParser
+	getParser    GetUserParser
 )
 
 type userAccountService struct {
 	repository repositories.Repository
 }
 
-func (s *userAccountService) GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccount, error) {
-	return s.repository.GetAll(paginator)
+func (s *userAccountService) GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccountRequestDto, error) {
+	users, err := s.repository.GetAll(paginator)
+	if err != nil {
+		return []*domain.UserAccountRequestDto{}, err
+	}
+
+	usersDTO := []*domain.UserAccountRequestDto{}
+	for _, u := range users {
+		userDTO, _ := getParser.ParseMessageToDomain(u)
+		usersDTO = append(usersDTO, userDTO)
+	}
+
+	return usersDTO, nil
 }
 
-func (s *userAccountService) Get(ID string) (*domain.UserAccount, error) {
-	return s.repository.Get(ID)
+func (s *userAccountService) Get(ID string) (*domain.UserAccountRequestDto, error) {
+	user, err := s.repository.Get(ID)
+	if err != nil {
+		return &domain.UserAccountRequestDto{}, err
+	}
+
+	userDTO, _ := getParser.ParseMessageToDomain(user)
+	return userDTO, nil
 }
 
 func (s *userAccountService) Save(u *domain.UserAccountRequestDto) error {

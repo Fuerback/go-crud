@@ -43,8 +43,8 @@ func (ref *handlerSuite) SetupTest() {
 }
 
 func (ref *handlerSuite) TestGetAllUsers_Success() {
-	u := getUserEntity()
-	users := []*domain.UserAccount{&u}
+	u := getUserDTO()
+	users := []*domain.UserAccountRequestDto{u}
 
 	ref.service.On("GetAll", mock.Anything).Return(users, nil).Once()
 
@@ -82,8 +82,8 @@ func (ref *handlerSuite) TestUpdate_Success() {
 }
 
 func (ref *handlerSuite) TestGetUser_Success() {
-	user := getUserEntity()
-	ref.service.On("Get", UUID).Return(&user, nil).Once()
+	user := getUserDTO()
+	ref.service.On("Get", UUID).Return(user, nil).Once()
 
 	path := fmt.Sprintf("/api/useraccount/%s", UUID)
 

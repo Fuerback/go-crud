@@ -9,14 +9,14 @@ type UserAccountMock struct {
 	mock.Mock
 }
 
-func (ref *UserAccountMock) GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccount, error) {
+func (ref *UserAccountMock) GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccountRequestDto, error) {
 	args := ref.Called(paginator)
-	return args.Get(0).([]*domain.UserAccount), args.Error(1)
+	return args.Get(0).([]*domain.UserAccountRequestDto), args.Error(1)
 }
 
-func (ref *UserAccountMock) Get(ID string) (*domain.UserAccount, error) {
+func (ref *UserAccountMock) Get(ID string) (*domain.UserAccountRequestDto, error) {
 	args := ref.Called(ID)
-	return args.Get(0).(*domain.UserAccount), args.Error(1)
+	return args.Get(0).(*domain.UserAccountRequestDto), args.Error(1)
 }
 
 func (ref *UserAccountMock) Save(u *domain.UserAccountRequestDto) error {

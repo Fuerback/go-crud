@@ -4,9 +4,6 @@ import (
 	"encoding/json"
 )
 
-//esta função gera um erro no formato esperado
-//pelo http.ResponseWriter e em um formato
-//json
 func formatJSONError(message string) []byte {
 	appError := struct {
 		Message string `json:"message"`

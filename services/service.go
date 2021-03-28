@@ -6,8 +6,8 @@ import (
 )
 
 type UserAccountService interface {
-	GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccount, error)
-	Get(ID string) (*domain.UserAccount, error)
+	GetAll(paginator domain.PaginatorDTO) ([]*domain.UserAccountRequestDto, error)
+	Get(ID string) (*domain.UserAccountRequestDto, error)
 	Save(u *domain.UserAccountRequestDto) error
 	Update(ID string, u *domain.UserAccountRequestDto) error
 	Delete(ID string) error

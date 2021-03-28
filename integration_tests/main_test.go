@@ -88,6 +88,26 @@ func TestGetUnknownUser(t *testing.T) {
 	}
 }
 
+func TestSaveInvalidUser(t *testing.T) {
+	userDTO := getUserDTO()
+	userDTO.Email = "xxx"
+	body, _ := json.Marshal(userDTO)
+	requestReader := bytes.NewReader(body)
+
+	req, err := http.NewRequest("POST", "/api/useraccount", requestReader)
+	response := executeRequest(req)
+
+	if err != nil {
+		t.Fatalf("Error saving user: %s", err.Error())
+	}
+
+	checkResponseCode(t, http.StatusBadRequest, response.Code)
+
+	if body := response.Body.String(); body != "{\"message\":\"Key: 'UserAccountRequestDto.Email' Error:Field validation for 'Email' failed on the 'email' tag\"}" {
+		t.Errorf("Expected an error validation. Got %s", body)
+	}
+}
+
 func TestSaveUser(t *testing.T) {
 	userDTO := getUserDTO()
 	body, _ := json.Marshal(userDTO)

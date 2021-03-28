@@ -11,6 +11,7 @@ import (
 type (
 	SaveUserParser   struct{}
 	UpdateUserParser struct{}
+	GetUserParser    struct{}
 )
 
 func getDocumentType(document string) (string, error) {
@@ -22,6 +23,25 @@ func getDocumentType(document string) (string, error) {
 	default:
 		return "", domain.ErrInvalidDocument
 	}
+}
+
+func (ref GetUserParser) ParseMessageToDomain(u *domain.UserAccount) (*domain.UserAccountRequestDto, error) {
+	user := &domain.UserAccountRequestDto{
+		ID:            u.ID,
+		Name:          u.Name,
+		Email:         u.Email,
+		Document:      u.Document,
+		DocumentType:  u.DocumentType,
+		Bank:          u.Bank,
+		Agency:        u.Agency,
+		AgencyDigit:   u.AgencyDigit,
+		AccountNumber: u.AccountNumber,
+		AccountDigit:  u.AccountDigit,
+		AccountType:   u.AccountType,
+		Status:        u.Status,
+	}
+
+	return user, nil
 }
 
 func (ref UpdateUserParser) ParseMessageToDomain(ID string, u *domain.UserAccountRequestDto) (*domain.UserAccount, error) {
