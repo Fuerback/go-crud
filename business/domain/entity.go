@@ -28,7 +28,7 @@ CREATE TABLE user_account (
                             NOT NULL,
     name           STRING   NOT NULL,
     email          STRING   NOT NULL,
-    document       STRING   NOT NULL,
+    document       TEXT     NOT NULL,
     document_type  STRING   NOT NULL,
     bank           STRING   NOT NULL,
     agency         INTEGER  NOT NULL,
